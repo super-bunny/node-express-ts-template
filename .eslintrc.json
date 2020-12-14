@@ -1,0 +1,28 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "semi": "off",
+    "consistent-return": "off",
+    "template-curly-spacing": ["error", "always"],
+    "no-console": "off",
+    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(info|warn|error)$/]",
+        "message": "Unexpected console log, if it's only for debuguing pupose you can use console.[info|warn|error] to print message."
+      }
+    ]
+  }
+}
