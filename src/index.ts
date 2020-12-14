@@ -1,9 +1,10 @@
-require('dotenv').config()
-
 import express from 'express'
-import router from './routes'
-import { STATUS_CODES } from 'http'
 import cors from 'cors'
+import { STATUS_CODES } from 'http'
+import router from './routes'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
 
 const ENV: 'development' | 'production' | string = process.env.NODE_ENV ?? 'production'
 const port = process.env.PORT ?? 3000
@@ -14,7 +15,7 @@ app.use(cors())
 app.use('/', router)
 
 // Catch route not found (404)
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res
     .status(404)
     .send({
@@ -23,7 +24,7 @@ app.use(function (req, res, next) {
 })
 
 // Error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   const status: number = err.status ?? err.statusCode ?? res.statusCode ?? 500
 
   console.error(err)
@@ -39,5 +40,5 @@ app.use(function (err, req, res, next) {
 })
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${ port }`)
+  console.info(`App listening at http://localhost:${ port }`)
 })
